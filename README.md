@@ -1,22 +1,26 @@
-## 📅 Day 2 Progress — Smart Contract Development
+## 📅 Day 3 Progress — Backend ↔ Blockchain Integration
 
 ### ✅ Completed
-- Built NFT smart contract using OpenZeppelin
-- Added authority-based minting (restricted mint access)
-- Implemented Soulbound NFT logic (non-transferable)
-- Designed event-driven contract architecture
-- Added asset ↔ token mapping strategy
+- Deployed ERC-721 contract on Sepolia
+- Integrated smart contract with backend (Node.js)
+- Configured RPC connection and wallet signer
+- Connected contract using ABI + address
 
-### 🔐 Security Design
-- Restricted minting to authorized entities
-- Prevented token transfers for proof-only NFTs
-- Used OpenZeppelin standards for secure contract structure
+### ⚙️ Backend Implementation
+- Created blockchain utility module (`utils/blockchain.js`)
+- Implemented `mintNFT()` flow:
+  - Call contract → send transaction → wait for confirmation
+  - Parse transaction receipt → extract event logs
 
-### 🧠 Key Learnings
-- Smart contract access control
-- Soulbound NFT design patterns
-- Event-driven blockchain architecture
+### 🔍 Key Insight
+- `tokenId` is not returned directly
+- Extracted from emitted events in transaction logs
+
+### 🔐 Features Used
+- Authorized minter logic
+- Soulbound NFT behavior
+- Event-driven mint tracking
 
 ### 🚧 Next Step
-- Backend integration with smart contract
-- API layer for minting & verification
+- Build API endpoints for minting & verification
+- Store tokenId + txHash in database
