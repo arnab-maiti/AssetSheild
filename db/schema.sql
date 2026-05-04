@@ -11,8 +11,9 @@ create table assets (
   description TEXT,
   owner_name TEXT,
   
-  document_hash TEXT,
-  ipfs_url TEXT,
+  document_hash TEXT UNIQUE NOT NULL,
+  ipfs_url TEXT NOT NULL,
+  metadata_uri TEXT,
   
   status TEXT, -- active / revoked / expired
   issued_by UUID REFERENCES authorities(id),
@@ -21,6 +22,7 @@ create table assets (
   expiry_date TIMESTAMP,
   
   token_id TEXT,
+  tx_hash TEXT,
   
   similarity_score FLOAT,
   is_duplicate BOOLEAN,

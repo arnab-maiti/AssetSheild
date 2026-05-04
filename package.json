@@ -4,7 +4,8 @@
   "description": "- Built NFT smart contract using OpenZeppelin\r - Added authority-based minting (restricted mint access)\r - Implemented Soulbound NFT logic (non-transferable)\r - Designed event-driven contract architecture\r - Added asset ↔ token mapping strategy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "test": "hardhat test"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
   "dependencies": {
     "axios": "^1.15.2",
     "dotenv": "^17.4.2",
-    "form-data": "^4.0.5"
+    "form-data": "^4.0.5",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
   }
 }

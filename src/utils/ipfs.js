@@ -1,7 +1,7 @@
 import axios from "axios";
 import FormData from "form-data";
 
-export async function uploadFiletoIpfs(file) {
+export async function uploadFileToIPFS(file) {
     const formData = new FormData();
     formData.append("file", file.buffer, file.originalname);
 
