@@ -1,10 +1,11 @@
 {
   "name": "assetshield",
   "version": "1.0.0",
+  "type": "module",
   "description": "- Built NFT smart contract using OpenZeppelin\r - Added authority-based minting (restricted mint access)\r - Implemented Soulbound NFT logic (non-transferable)\r - Designed event-driven contract architecture\r - Added asset ↔ token mapping strategy",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node server.js",
     "test": "hardhat test"
   },
   "repository": {
@@ -14,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/arnab-maiti/AssetSheild/issues"
   },
@@ -28,7 +28,9 @@
   "dependencies": {
     "axios": "^1.15.2",
     "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "form-data": "^4.0.5",
+    "multer": "^2.1.1",
     "pg": "^8.16.3",
     "sequelize": "^6.37.7"
   }

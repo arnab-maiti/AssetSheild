@@ -1,29 +1,10 @@
-import sequelize from "./config/db.js";
-import Asset from "./models/asset.model.js";
+import express from "express";
+import assetRoutes from "./routes/asset.routes.js";
 
-async function ensureAssetColumns() {
-    const queryInterface = sequelize.getQueryInterface();
-    const columns = await queryInterface.describeTable("assets").catch(() => null);
+const app = express();
 
-    if (!columns) {
-        return;
-    }
+app.use(express.json());
 
-    const attributes = Asset.getAttributes();
-    const optionalColumns = ["metadata_uri", "token_id", "tx_hash"];
+app.use("/api/assets", assetRoutes);
 
-    for (const columnName of optionalColumns) {
-        if (!columns[columnName]) {
-            await queryInterface.addColumn("assets", columnName, attributes[columnName]);
-        }
-    }
-}
-
-try {
-    await sequelize.sync();
-    await ensureAssetColumns();
-    console.log("DB connected");
-} catch (error) {
-    console.error("DB connection failed:", error.message);
-    process.exitCode = 1;
-}
+export default app;

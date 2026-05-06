@@ -5,6 +5,7 @@ import { uploadFileToIPFS, uploadMetadataToIPFS } from "../utils/ipfs.js";
 
 async function createAssetService(file, data) {
     try {
+        console.log("DATA:", data);
         // 1. Generate hash
         const documentHash = generateHash(file.buffer);
 
@@ -32,7 +33,7 @@ async function createAssetService(file, data) {
             document_hash: documentHash,
             ipfs_url: fileUrl,
             metadata_uri: metadataURI,
-            issued_by: data.issuedBy || data.issued_by,
+            issued_by: data.issued_by,
             issued_at: new Date(),
             expiry_date: data.expiryDate || data.expiry_date,
             status: "pending_mint",
