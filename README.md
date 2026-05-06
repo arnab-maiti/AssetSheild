@@ -1,26 +1,31 @@
-## 📅 Day 3 Progress — Backend ↔ Blockchain Integration
+## 📅 Day 4 Progress — API Layer & End-to-End Flow
 
 ### ✅ Completed
-- Deployed ERC-721 contract on Sepolia
-- Integrated smart contract with backend (Node.js)
-- Configured RPC connection and wallet signer
-- Connected contract using ABI + address
+- Built API endpoint: `POST /api/assets`
+- Implemented controller (`createAsset`) and routing
+- Added file upload using multer
 
-### ⚙️ Backend Implementation
-- Created blockchain utility module (`utils/blockchain.js`)
-- Implemented `mintNFT()` flow:
-  - Call contract → send transaction → wait for confirmation
-  - Parse transaction receipt → extract event logs
+### 🔗 End-to-End Flow
+Upload file → generate SHA-256 hash → upload to IPFS → create metadata → save to DB (pending) → call smart contract mint → update DB (active)
 
-### 🔍 Key Insight
-- `tokenId` is not returned directly
-- Extracted from emitted events in transaction logs
+### ⛓️ Blockchain Integration
+- Integrated ethers.js in backend
+- Called `safeMint()`
+- Parsed transaction receipt to extract `tokenId` from events
 
-### 🔐 Features Used
-- Authorized minter logic
-- Soulbound NFT behavior
-- Event-driven mint tracking
+### 🧱 Architecture
+Controller → Service → (DB + IPFS + Blockchain)
+
+### 🐞 Debugging & Fixes
+- Hardhat dependency/version issues
+- ES modules vs CommonJS
+- ABI/RPC configuration
+- DB issues (UUID, not-null, schema mismatches)
+
+### ⚠️ Pending
+- Fix `issued_by` DB mismatch (blocking edge case)
 
 ### 🚧 Next Step
-- Build API endpoints for minting & verification
-- Store tokenId + txHash in database
+- Complete verification API
+- Add input validation & error handling
+- Improve DB consistency checks
