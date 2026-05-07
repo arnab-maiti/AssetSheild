@@ -19,7 +19,10 @@ event MinterRemoved(address minter);
     constructor(address initialOwner)
         ERC721("Asset", "AST")
         Ownable(initialOwner)
-    {}
+    {
+        authorizedMinters[initialOwner] = true;
+        emit MinterAdded(initialOwner);
+    }
 
     function safeMint(address to, string memory uri)
         external

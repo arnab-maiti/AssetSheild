@@ -25,6 +25,7 @@ async function main() {
 
     console.log("Contract deployed to:", contract.target);
     console.log("Initial owner:", initialOwner);
+    console.log("Initial owner authorized as minter:", await contract.authorizedMinters(initialOwner));
 }
 
 main().catch((error) => {

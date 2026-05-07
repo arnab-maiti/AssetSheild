@@ -1,1 +1,1 @@
-export { mintNFT } from "../config/blockchain.js";
+export { getContract, mintNFT, verifyOnChain } from "../config/blockchain.js";
