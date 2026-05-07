@@ -1,31 +1,43 @@
-## 📅 Day 4 Progress — API Layer & End-to-End Flow
+## 📅 Day 5 Progress — Verification System
 
 ### ✅ Completed
-- Built API endpoint: `POST /api/assets`
-- Implemented controller (`createAsset`) and routing
-- Added file upload using multer
+- Designed public verification API:
+  - `GET /api/assets/verify/:tokenId`
+- Implemented verification controller + service architecture
 
-### 🔗 End-to-End Flow
-Upload file → generate SHA-256 hash → upload to IPFS → create metadata → save to DB (pending) → call smart contract mint → update DB (active)
+### 🔍 Verification Flow
+1. Find asset in database
+2. Check asset status
+3. Validate expiry
+4. Verify token on blockchain
+5. Compare metadata integrity
+6. Return verification result
 
-### ⛓️ Blockchain Integration
-- Integrated ethers.js in backend
-- Called `safeMint()`
-- Parsed transaction receipt to extract `tokenId` from events
+### ⛓️ Blockchain Verification
+Used:
+- `ownerOf()`
+- `tokenURI()`
 
-### 🧱 Architecture
-Controller → Service → (DB + IPFS + Blockchain)
+Purpose:
+- Validate token existence
+- Confirm blockchain ownership
+- Detect metadata tampering
 
-### 🐞 Debugging & Fixes
-- Hardhat dependency/version issues
-- ES modules vs CommonJS
-- ABI/RPC configuration
-- DB issues (UUID, not-null, schema mismatches)
+### 🛡️ Metadata Integrity Check
+Compared:
+DB `metadata_uri` === Blockchain `tokenURI`
 
-### ⚠️ Pending
-- Fix `issued_by` DB mismatch (blocking edge case)
+Ensures tamper-proof verification between backend and blockchain.
+
+### 🧱 API Response Design
+Structured response:
+- `verified`
+- `asset`
+- `blockchain`
+
+Frontend-friendly and scalable verification architecture.
 
 ### 🚧 Next Step
-- Complete verification API
-- Add input validation & error handling
-- Improve DB consistency checks
+- Add verification logs
+- Improve error handling
+- Build minimal frontend dashboard
