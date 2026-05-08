@@ -1,43 +1,34 @@
-## 📅 Day 5 Progress — Verification System
+## 📅 Day 6 Progress — Asset Lifecycle Management
 
 ### ✅ Completed
-- Designed public verification API:
-  - `GET /api/assets/verify/:tokenId`
-- Implemented verification controller + service architecture
+Implemented asset lifecycle management system with controlled state transitions.
 
-### 🔍 Verification Flow
-1. Find asset in database
-2. Check asset status
-3. Validate expiry
-4. Verify token on blockchain
-5. Compare metadata integrity
-6. Return verification result
+### 🔄 Asset Statuses
+- active
+- expired
+- revoked
+- suspended
+- fraud_detected
 
-### ⛓️ Blockchain Verification
-Used:
-- `ownerOf()`
-- `tokenURI()`
+### ⚙️ Features
+- Built status transition rules using FSM (Finite State Machine) architecture
+- Added protected lifecycle update flow
+- Implemented:
+  - `PATCH /api/assets/:id/status`
+- Added transition validation logic
+- Prevented invalid state transitions
 
-Purpose:
-- Validate token existence
-- Confirm blockchain ownership
-- Detect metadata tampering
+### 🛡️ Validation Examples
+- revoked → active ❌
+- fraud_detected → active ❌
 
-### 🛡️ Metadata Integrity Check
-Compared:
-DB `metadata_uri` === Blockchain `tokenURI`
+### 🧱 Architecture
+Controller → Service → Database
 
-Ensures tamper-proof verification between backend and blockchain.
-
-### 🧱 API Response Design
-Structured response:
-- `verified`
-- `asset`
-- `blockchain`
-
-Frontend-friendly and scalable verification architecture.
+### 🧠 Key Learning
+Finite State Machine (FSM) based lifecycle management for secure state handling.
 
 ### 🚧 Next Step
-- Add verification logs
-- Improve error handling
-- Build minimal frontend dashboard
+- Add audit logs for status changes
+- Add role-based authorization
+- Build admin moderation dashboard
