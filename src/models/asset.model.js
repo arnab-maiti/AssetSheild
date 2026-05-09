@@ -43,9 +43,11 @@ const Asset = sequelize.define("Asset", {
             isIn: [[
                 "pending_mint",
                 "active",
-                "revoked",
                 "expired",
+                "revoked",
                 "mint_failed",
+                "fraud_detected",
+                "suspended",
             ]],
         },
     },

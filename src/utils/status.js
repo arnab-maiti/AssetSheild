@@ -1,12 +1,19 @@
 export const allowedStatuses = [
+  "pending_mint",
   "active",
   "expired",
   "revoked",
+  "mint_failed",
   "fraud_detected",
   "suspended"
 ];
 
 export const allowedTransitions = {
+
+  pending_mint: [
+    "active",
+    "mint_failed"
+  ],
 
   active: [
     "expired",
@@ -28,6 +35,10 @@ export const allowedTransitions = {
     "revoked"
   ],
 
-  revoked: []
+  revoked: [],
+
+  mint_failed: [
+    "pending_mint"
+  ],
 
 };

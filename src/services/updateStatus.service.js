@@ -1,5 +1,5 @@
 import Asset from "../models/asset.model.js";
-
+import { createAssetEvent } from "./event.service.js";
 import {
   allowedStatuses,
   allowedTransitions
@@ -27,11 +27,24 @@ async function updateAssetStatusService(id, newStatus) {
          `Invalid status transition from ${currentStatus} to ${newStatus}`
       );
    }
-
+   const oldStatus = asset.status;
    asset.status = newStatus;
 
    await asset.save();
+   await createAssetEvent({
 
+   asset_id: asset.id,
+
+   event_type: "status_updated",
+
+   performed_by: asset.issued_by,
+
+   metadata: {
+      old_status: oldStatus,
+      new_status: newStatus
+   }
+
+});
    return asset;
 }
 
