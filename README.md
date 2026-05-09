@@ -1,34 +1,46 @@
-## 📅 Day 6 Progress — Asset Lifecycle Management
+## 📅 Day 7 Progress — Event-Driven Audit System
 
 ### ✅ Completed
-Implemented asset lifecycle management system with controlled state transitions.
+Implemented a production-style event-driven audit architecture.
 
-### 🔄 Asset Statuses
-- active
-- expired
-- revoked
-- suspended
-- fraud_detected
+### 🧱 New Architecture
+#### `assets`
+Stores current asset state.
+
+#### `asset_events`
+Stores complete lifecycle and history of all asset actions.
 
 ### ⚙️ Features
-- Built status transition rules using FSM (Finite State Machine) architecture
-- Added protected lifecycle update flow
-- Implemented:
-  - `PATCH /api/assets/:id/status`
-- Added transition validation logic
-- Prevented invalid state transitions
+- Lifecycle event tracking
+- Automatic event creation on status updates
+- JSONB-based metadata storage
+- Event-driven backend architecture
+- Immutable-style audit history
 
-### 🛡️ Validation Examples
-- revoked → active ❌
-- fraud_detected → active ❌
+### 🧠 Key Concept Learned
+Current State vs Event History
 
-### 🧱 Architecture
-Controller → Service → Database
+| Table | Purpose |
+|------|------|
+| assets | Current asset state |
+| asset_events | Complete historical timeline |
 
-### 🧠 Key Learning
-Finite State Machine (FSM) based lifecycle management for secure state handling.
+### 🔍 Example Events
+- asset_created
+- asset_minted
+- status_changed
+- asset_revoked
+- fraud_detected
+
+### 🚀 Why This Matters
+This architecture enables:
+- auditability
+- compliance tracking
+- fraud investigation
+- historical replay
+- trust verification
 
 ### 🚧 Next Step
-- Add audit logs for status changes
-- Add role-based authorization
-- Build admin moderation dashboard
+- Add event querying APIs
+- Build admin activity timeline
+- Add actor-based tracking
