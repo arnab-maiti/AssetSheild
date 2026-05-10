@@ -1,46 +1,46 @@
-## 📅 Day 7 Progress — Event-Driven Audit System
+🚀 Day 8 — Duplicate Document Prevention Layer
+🎯 Objective
+Implemented a fraud prevention system to avoid duplicate asset minting using document_hash.
 
-### ✅ Completed
-Implemented a production-style event-driven audit architecture.
+🧠 What was built
+Added duplicate check in service layer
 
-### 🧱 New Architecture
-#### `assets`
-Stores current asset state.
+Prevented re-minting of same document using document_hash
 
-#### `asset_events`
-Stores complete lifecycle and history of all asset actions.
+Introduced audit event logging for duplicate attempts
 
-### ⚙️ Features
-- Lifecycle event tracking
-- Automatic event creation on status updates
-- JSONB-based metadata storage
-- Event-driven backend architecture
-- Immutable-style audit history
+Maintained full traceability of malicious or repeated uploads
 
-### 🧠 Key Concept Learned
-Current State vs Event History
+⚙️ Core Logic
+Before creating asset:
 
-| Table | Purpose |
-|------|------|
-| assets | Current asset state |
-| asset_events | Complete historical timeline |
+Check if document_hash already exists in DB
 
-### 🔍 Example Events
-- asset_created
-- asset_minted
-- status_changed
-- asset_revoked
-- fraud_detected
+If exists:
 
-### 🚀 Why This Matters
-This architecture enables:
-- auditability
-- compliance tracking
-- fraud investigation
-- historical replay
-- trust verification
+Block creation
 
-### 🚧 Next Step
-- Add event querying APIs
-- Build admin activity timeline
-- Add actor-based tracking
+Log duplicate_detected event
+
+Return existing asset reference
+
+🔐 Key Features Added
+✔ Duplicate prevention at service layer
+
+✔ Audit trail for fraud attempts
+
+✔ Existing asset linking
+
+✔ Clean separation of business logic
+
+🧠 System Design Upgrade
+This step upgraded the system into:
+
+Event-driven + fraud-aware backend architecture
+
+🚀 Impact
+Prevents data duplication attacks
+
+Ensures asset uniqueness
+
+Strengthens trust layer for future blockchain integration
