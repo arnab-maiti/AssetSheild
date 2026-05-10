@@ -38,14 +38,6 @@ async function createAsset(req,res) {
           catch (error) {
         console.error("Controller Error:", error.message);
 
-        if (error.name === "DuplicateAssetError" || error.name === "SequelizeUniqueConstraintError") {
-            return res.status(409).json({
-                success: false,
-                message: "Asset already exists",
-                error: "A document with this hash has already been uploaded"
-            });
-        }
-
         return res.status(500).json({
             success: false,
             message: "Asset creation failed",

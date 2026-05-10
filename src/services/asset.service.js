@@ -3,7 +3,7 @@ import Asset from "../models/asset.model.js";
 import Authority from "../models/authority.model.js";
 import { generateHash } from "../utils/hash.js";
 import { uploadFileToIPFS, uploadMetadataToIPFS } from "../utils/ipfs.js";
-
+import { createAssetEvent } from "./event.service.js";
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 function getIssuerName(data) {
@@ -36,15 +36,36 @@ async function createAssetService(file, data) {
         const existingAsset = await Asset.findOne({
             where: { document_hash: documentHash },
         });
+         const issuerName = getIssuerName(data);
+        const issuedBy = await resolveIssuedBy(data);
 
         if (existingAsset) {
-            const error = new Error("A document with this hash has already been uploaded");
-            error.name = "DuplicateAssetError";
-            throw error;
-        }
+            await createAssetEvent({
 
-        const issuerName = getIssuerName(data);
-        const issuedBy = await resolveIssuedBy(data);
+   asset_id: existingAsset.id,
+
+   event_type: "duplicate_detected",
+
+   performed_by: issuedBy,
+
+   metadata: {
+
+      original_asset_id: existingAsset.id,
+
+      original_ipfs_url: existingAsset.ipfs_url,
+
+      original_metadata_uri: existingAsset.metadata_uri,
+
+      reason: "Duplicate document hash detected"
+
+   }
+
+});
+return {
+   duplicate: true,
+   message: "Duplicate document detected"
+};
+        }
 
         // 2. Upload file to IPFS
         const fileUrl = await uploadFileToIPFS(file);
@@ -101,7 +122,7 @@ async function createAssetService(file, data) {
         return asset;
 
     } catch (error) {
-        console.error("Create Asset Error:", error.message);
+        console.error("FULL ERROR:", error);
         throw error;
     }
 }
