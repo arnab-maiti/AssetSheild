@@ -17,7 +17,7 @@ async function verifyAssetData(req,res) {
             data: verificationResult
         });
     } catch (error) {
-        const statusCode = error.message === "Asset not found" ? 404 : 400;
+        const statusCode = error.message === "asset is not accessable" ? 404 : 400;
 
         return res.status(statusCode).json({
             success: false,
