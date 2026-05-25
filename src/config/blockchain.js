@@ -64,16 +64,16 @@ async function mintNFT(to, metadataURI) {
             }
 
             try {
-                const parsedLog = assetContract.interface.parseLog(log);
+                const parselog = assetContract.interface.parseLog(log);
 
-                if (parsedLog?.name === "AssetMinted") {
-                    tokenId = (parsedLog.args.tokenId ?? parsedLog.args[0]).toString();
+                if (parselog?.name === "AssetMinted") {
+                    tokenId = (parselog.args.tokenId ?? parselog.args[0]).toString();
                     break;
                 }
 
-                if (parsedLog?.name === "Transfer") {
-                    const from = parsedLog.args.from ?? parsedLog.args[0];
-                    const mintedTokenId = parsedLog.args.tokenId ?? parsedLog.args[2];
+                if (parselog?.name === "Transfer") {
+                    const from = parselog.args.from ?? parselog.args[0];
+                    const mintedTokenId = parselog.args.tokenId ?? parselog.args[2];
 
                     if (from === ethers.ZeroAddress) {
                         tokenId = mintedTokenId.toString();
