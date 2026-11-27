@@ -389,7 +389,6 @@ Stores asset risk assessment information.
 
 Stores verification attempts, IP information, results, and suspicious activity indicators.
 
----
 
 ## 🔗 Smart Contract Integration
 
